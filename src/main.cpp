@@ -44,7 +44,14 @@ int main(int argc, char* argv[])
 	// C:/Projekte/calculatorProtocol/tasks.json
 	auto jsonTaskPath = getPathFromUser();
 
-	auto tasks = parseJsonFile(jsonTaskPath);
+	std::vector<VariantOperation> tasks;
+	try {
+		tasks = parseJsonFile(jsonTaskPath);
+	}
+	catch (...) {
+		std::cout << "Invalid JSON format." << std::endl;
+		return -1;
+	}
 
 	std::string resultString = "";
 	for (const auto& task : tasks) {
